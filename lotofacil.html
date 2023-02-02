@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Números aleatórios</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+      button {
+        margin-top: 1em;
+        padding: 0.5em 1em;
+        background-color: lightblue;
+        border: none;
+        border-radius: 0.25em;
+        color: white;
+        cursor: pointer;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 auto;
+        width: fit-content;
+      }
+      li {
+        display: inline-block;
+        margin: 0 1em;
+        padding: 0.5em;
+        background-color: lightblue;
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        line-height: 2em;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>15 números aleatórios únicos entre 1 e 25</h1>
+    <button id="refresh-button">Atualizar</button>
+    <ul id="random-numbers"></ul>
+    <script>
+      const list = document.querySelector("#random-numbers");
+      const refreshButton = document.querySelector("#refresh-button");
+      function generateNumbers() {
+        list.innerHTML = "";
+        const numbers = new Set();
+        while (numbers.size < 15) {
+          numbers.add(Math.floor(Math.random() * 25) + 1);
+        }
+        const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+        for (const number of sortedNumbers) {
+          const item = document.createElement("li");
+          item.textContent = number;
+          list.appendChild(item);
+        }
+      }
+      refreshButton.addEventListener("click", generateNumbers);
+      generateNumbers();
+    </script>
+  </body>
+</html>
